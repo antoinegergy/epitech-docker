@@ -1,13 +1,12 @@
 #!/bin/sh -x
 
-IPWD=$PWD
-
-# check that the manifest & associated files are in $PWD/mouli
-if [[ ! -f mouli/manifest.json ]]
+if [ -z ${BUGS_LOGIN+x} ]
 then
-    echo "This version of bugs requires this project to be reconfigured, please run the matching SEED job."
-    exit 1
+	echo "This version of bugs requires a more recent project configuration. Please re-run your SEED job"
+	exit 1
 fi
+
+IPWD=$PWD
 
 # Norm check
 ~/norme_deepthought.py rendu -score -nocheat -swap_traces -malloc >> ~/workspace/norm.dpr 2> ~/workspace/norm.note
@@ -23,7 +22,7 @@ cp -rn rendu/* mouli
 # run bugs
 cd mouli
 bugs -version
-bugs -out "graph txt xunit" -login $DBUSER -city $CITY
+bugs -out "txt xunit" -rec "graph api" -login "$BUGS_LOGIN" -city "$BUGS_CITY" -slug "$BUGS_SLUG" -module "$BUGS_MODULE" -inst "$BUGS_INST" -year "$BUGS_YEAR"
 
 # retrieve run artifacts
 cd $IPWD
