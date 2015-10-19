@@ -6,6 +6,10 @@ RUN zypper -n install \
     nano              \
     vim
 
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
 RUN useradd -md /home/bill bill
 USER bill
 WORKDIR /home/bill/workspace

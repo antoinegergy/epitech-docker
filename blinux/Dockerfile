@@ -24,6 +24,8 @@ RUN zypper -n install \
     tmux              \
     valgrind          \
     zip unzip
+RUN zypper -n install \
+    glibc-locale
 
 ADD minilibx /usr/src/minilibx
 RUN make -C /usr/src/minilibx install
