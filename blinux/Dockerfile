@@ -15,6 +15,7 @@ RUN zypper -n install \
 RUN zypper -n install          \
     libSDL-devel libSDL2-devel \
     ncurses ncurses-devel      \
+    boost-devel                \
     php5                       \
     python-numpy               \
     python3                    \
