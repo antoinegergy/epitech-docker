@@ -12,6 +12,8 @@ RUN zypper -n install \
     ksh               \
     tcsh              \
     zsh
+RUN zypper -n install \
+    ltrace
 RUN zypper -n install          \
     libSDL-devel libSDL2-devel \
     ncurses ncurses-devel      \
