@@ -447,7 +447,6 @@ class norme:
             print("Impossible d'ouvrir %s", file)
 
     def scandir(self, thedir):
-        self.the_dir = thedir
         try:
             dir = os.listdir(thedir)
         except:
@@ -460,6 +459,7 @@ class norme:
                         continue
                     if (os.path.isdir(thedir + file)):
                         self.scandir(thedir + "/" + file + "/")
+                    self.the_dir = thedir
                     if file[-2:] == '.c' or file[-2:] == '.h':
                         self.file = file
                         self.new_file()
@@ -575,6 +575,7 @@ def main():
     except NameError:
         print("Usage: norme.py <dir_to_scan>")
     if moulin.score:
+        #print "Vous avez fait",moulin.note,"fautes de norme"
         print(moulin.note, file=sys.stderr)
 
 if __name__ == "__main__":
