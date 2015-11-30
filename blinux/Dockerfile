@@ -19,6 +19,7 @@ RUN zypper -n install          \
     ncurses ncurses-devel      \
     boost-devel                \
     php5                       \
+    php5-mbstring              \
     python-numpy               \
     python3                    \
     python3-numpy              \
