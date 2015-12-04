@@ -35,5 +35,6 @@ ADD minilibx /usr/src/minilibx
 RUN make -C /usr/src/minilibx install
 RUN make -C /usr/src/minilibx clean
 
+ADD xterm-noapp /usr/share/terminfo/x/xterm-noapp
 ADD .bashrc /etc/skel/.bashrc
 ADD bugs /usr/bin/bugs
