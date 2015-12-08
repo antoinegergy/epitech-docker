@@ -23,6 +23,8 @@ RUN zypper -n install          \
     php5-mbstring              \
     python-numpy               \
     python3                    \
+    python3-pip                \
+    ca-certificates-mozilla    \
     python3-numpy              \
     ruby
 RUN zypper -n install \
@@ -31,6 +33,8 @@ RUN zypper -n install \
     zip unzip
 RUN zypper -n install \
     glibc-locale
+
+RUN pip3 install -Iv pexpect==4.0.1
 
 ADD minilibx /usr/src/minilibx
 RUN make -C /usr/src/minilibx install
