@@ -7,7 +7,8 @@ RUN zypper -n install \
     gcc gcc-c++       \
     libX11-devel      \
     libXext-devel     \
-    make
+    make              \
+    which
 RUN zypper -n install \
     ksh               \
     tcsh              \
