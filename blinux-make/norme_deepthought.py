@@ -167,7 +167,7 @@ class norme:
         norme = -1
         if self.check_return.passed:
             norme = 0
-        if (self.line[:1] == '\n'):# and self.line != "*/\n"):
+        if (self.line[:1] == '\n'):
             if (self.nb_return == 1):
                 self.print_error('double retour a la ligne', norme)
                 self.check_return.__func__.passed = 1
@@ -216,7 +216,7 @@ class norme:
 
     @static_var("passed", 0)
     def check_arg(self):
-        norme = -1
+        norme = -5
         if self.check_arg.passed:
             norme = 0
         if self.line[-2:] == ")\n" and self.line[:1] != '\t'  and self.line[:1] != ' ':
@@ -226,7 +226,6 @@ class norme:
                 note = 1
                 if len(test.groups()) > 0:
                     note = len(test.groups()) - 4
-                    #self.note += len(test.groups()) - 1 - 4
                 self.print_error('plus de 4 arguments passes en parametre', norme)
                 self.check_arg.__func__.passed = 1
 
@@ -253,7 +252,6 @@ class norme:
             if test:
                 note = 1
                 if len(test.groups()) > 0:
-#                    self.note += len(test.groups()) - 1
                     note = len(test.groups())
                     self.print_error('Commentaires dans le code', norme)
                     self.check_comment.__func__.passed = 1
@@ -322,19 +320,8 @@ class norme:
             note = 1
             if len(test.groups()) > 0:
                 note = len(test.groups())
-                #                self.note += len(test.groups()) - 1
                 self.print_error(msg, norme)
                 self.check_regex.__func__.passed = 1
-
-#     def check_endlinespaces(self):
-# #        dot = self.line.rfind(';')
-#         end = self.line.find('\n')
-#  #       tab = self.line.rfind('\t', 0, end)
-#         res = end - dot - 1
-#         if dot > 0 and res > 0:
-#             self.print_error("Espace(s) en fin de ligne", res)
-#         if tab > 0 and self.line[tab:].isspace():
-#             self.print_error("Tab(s) en fin de ligne", len(self.line[tab:]))
 
     @static_var("passed", 0)
     def check_returns(self):
@@ -379,7 +366,6 @@ class norme:
     @static_var("passed", 0)
     def check_line(self):
         norme = -5
-        #        self.check_comment()
         if self.is_func != 1 and self.line.find("/*") != -1:
             self.out_comment = 1
         if  self.out_comment:
@@ -389,7 +375,6 @@ class norme:
             return
         if self.is_func == 1 and self.line.find("/*") != -1 and self.line.find('\"') == -1:
             self.in_comment = 1
-        # if self.is_func == 1 and self.in_comment and self.line.find("*/") != -1:
             if self.check_line.passed:
                 norme = 0
             self.print_error("Commentaires dans le code", norme)
@@ -398,19 +383,12 @@ class norme:
                 self.nb_return = 0
                 self.in_comment = 0
                 return
-        # if (self.in_comment == 1):
-        #     if not self.check_line.passed:
-        #         self.print_error("Commentaires dans le code", norme)
-        #         self.check_line.__func__.passed = 1     
         self.check_nbline() # DOIT TOUJORS ETRE EN PREMIER
-        self.check_sys_include()
+#        self.check_sys_include()
         self.check_virgule()
         self.check_space_par()
         self.check_endlinespaces()
-#        self.check_regex('[ \t]$', 'Espace en fin de ligne')
-#        if self.creturn == 0:
         self.check_returns()
-#            self.check_regex('return( \(\)| ;|;)', 'Mauvais format de return')
         if self.libc == 0:
             self.check_regex('[^_](printf|atof|atoi|atol|strcmp|strlen|strcat|strncat|strncmp|strcpy|strncpy|fprintf|strstr|strtoc|sprintf|asprintf|perror|strtod|strtol|strtoul)(\()', \
                              'Fonction de la lib C')
@@ -426,21 +404,17 @@ class norme:
             self.check_malloc()
         
     def print_error(self, msg, val = -1):
-        if  val != 0:
-            if val == -42 or self.note == -42:
-                self.note = -42
-                return
-            if self.note == -10 or self.note > 0:
-                self.note = 1
-            elif self.note <= -10:
-                self.note = 1
-            elif self.note == -5 or (self.note + val < -5):
-                self.note = -10
-            else:
-                self.note = self.note + val
+        self.note = self.note + val
         print("Erreur dans %s a la ligne %s:%s => %s"% (self.the_dir + self.file, self.nb_line, msg, val))
         if self.printline:
             print(self.line)
+
+    def get_score(self):
+        if self.note < -10:
+            return (1)
+        elif self.note < -5:
+            return (-10)
+        return (self.note)
 
     def cant_open(self, file):
         if (self.verbose or file == sys.argv[1]):
@@ -517,10 +491,6 @@ def check_makefile(thedir):
             test = re.search(p, buffer)
             if not test:
                 print("-Wall n'est pas dans le Makefile")
-            # p = re.compile('(-pedantic)')
-            # test = re.search(p, buffer)
-            # if not test:
-            #     print "-pedantic n'est pas dans le Makefile"
             if buffer[:2] != "##":
                 print("Header du Makefile invalide")
             fd.close()
@@ -575,8 +545,7 @@ def main():
     except NameError:
         print("Usage: norme.py <dir_to_scan>")
     if moulin.score:
-        #print "Vous avez fait",moulin.note,"fautes de norme"
-        print(moulin.note, file=sys.stderr)
+        print(moulin.get_score(), file=sys.stderr)
 
 if __name__ == "__main__":
     main()
