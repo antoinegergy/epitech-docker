@@ -31,4 +31,8 @@ cp mouli/note.txt .
 cp mouli/tests_report.xml .
 
 # wipe mouli folder
-rm -rf mouli
+if [ -z ${NODEL+x} ]
+then
+	rm -rf mouli
+fi
+
