@@ -10,7 +10,7 @@ then
 fi
 
 # Norm check
-(cd mouli && ~/norme_deepthought.py rendu -score -nocheat -swap_traces -malloc >> ~/workspace/norm.dpr 2> ~/workspace/norm.note)
+~/norme_deepthought.py rendu -score -nocheat -swap_traces -malloc >> ~/workspace/norm.dpr 2> ~/workspace/norm.note
 
 # make (1/2 - mouli)
 [ -f mouli/Makefile ] && make -C mouli
