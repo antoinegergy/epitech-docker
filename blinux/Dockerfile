@@ -8,7 +8,8 @@ RUN zypper -n install \
     libX11-devel      \
     libXext-devel     \
     make              \
-    which
+    which             \
+    tar
 RUN zypper -n install \
     ksh               \
     tcsh              \
