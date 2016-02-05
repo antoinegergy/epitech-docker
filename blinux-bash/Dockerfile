@@ -1,4 +1,4 @@
-FROM epitechcontent/blinux:vnext
+FROM epitechcontent/blinux:latest
 MAINTAINER Thomas Dufour <thomas.dufour@epitech.eu>
 
 RUN zypper -n install \
