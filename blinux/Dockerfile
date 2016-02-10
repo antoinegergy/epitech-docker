@@ -29,6 +29,7 @@ RUN zypper -n install          \
     python3-numpy              \
     ruby
 RUN zypper -n install \
+    bc                \
     tmux              \
     valgrind          \
     zip unzip
