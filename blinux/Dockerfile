@@ -27,7 +27,9 @@ RUN zypper -n install          \
     python3-pip                \
     ca-certificates-mozilla    \
     python3-numpy              \
-    ruby
+    ruby                       \
+    ocaml                      \
+    ocaml-camlp4
 RUN zypper -n install \
     bc                \
     tmux              \
