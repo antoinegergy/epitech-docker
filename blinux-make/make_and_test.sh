@@ -22,7 +22,7 @@ cp -rn rendu/* mouli
 # run bugs
 cd mouli
 bugs -version
-bugs -out "txt xunit" -rec "graph api" -login "$BUGS_LOGIN" -city "$BUGS_CITY" -slug "$BUGS_SLUG" -module "$BUGS_MODULE" -inst "$BUGS_INST" -year "$BUGS_YEAR"
+bugs -out "txt xunit" -rec "graph api" -login "$BUGS_LOGIN" -city "$BUGS_CITY" -slug "$BUGS_SLUG" -module "$BUGS_MODULE" -inst "$BUGS_INST" -year "$BUGS_YEAR" -type "$BUGS_TYPE"
 
 # retrieve run artifacts
 cd $IPWD
