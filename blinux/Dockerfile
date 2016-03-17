@@ -17,6 +17,7 @@ RUN zypper -n install \
 RUN zypper -n install \
     ltrace
 RUN zypper -n install          \
+    cunit-devel                \
     libSDL-devel libSDL2-devel \
     ncurses ncurses-devel      \
     boost-devel                \
