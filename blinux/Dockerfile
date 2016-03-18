@@ -17,9 +17,11 @@ RUN zypper -n install \
 RUN zypper -n install \
     ltrace
 RUN zypper -n install          \
+    nasm                       \
     cunit-devel                \
     libSDL-devel libSDL2-devel \
     ncurses ncurses-devel      \
+    terminfo                   \
     boost-devel                \
     php5                       \
     php5-mbstring              \
@@ -45,6 +47,5 @@ ADD minilibx /usr/src/minilibx
 RUN make -C /usr/src/minilibx install
 RUN make -C /usr/src/minilibx clean
 
-ADD xterm-noapp /usr/share/terminfo/x/xterm-noapp
 ADD .bashrc /etc/skel/.bashrc
 ADD bugs /usr/bin/bugs
