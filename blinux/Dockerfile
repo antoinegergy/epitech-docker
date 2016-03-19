@@ -36,7 +36,7 @@ RUN zypper -n install          \
 RUN zypper -n install \
     bc                \
     tmux              \
-    valgrind          \
+    valgrind gdb      \
     zip unzip
 RUN zypper -n install \
     glibc-locale
