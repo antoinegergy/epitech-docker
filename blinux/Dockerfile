@@ -24,6 +24,7 @@ RUN zypper -n install          \
     terminfo                   \
     boost-devel                \
     php5                       \
+    php5-bcmath                \
     php5-mbstring              \
     python-numpy               \
     python3                    \
