@@ -21,6 +21,7 @@ RUN zypper -n install          \
     cunit-devel                \
     libSDL-devel libSDL2-devel \
     ncurses ncurses-devel      \
+    gmp-devel                  \
     terminfo                   \
     boost-devel                \
     php5                       \
