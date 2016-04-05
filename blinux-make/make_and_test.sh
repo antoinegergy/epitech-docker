@@ -24,9 +24,3 @@ cd mouli
 bugs -version
 bugs -out "txt xunit" -rec "graph api" -login "$BUGS_LOGIN" -city "$BUGS_CITY" -slug "$BUGS_SLUG" -module "$BUGS_MODULE" -inst "$BUGS_INST" -year "$BUGS_YEAR" -type "$BUGS_TYPE"
 
-# wipe mouli folder
-if [ -z ${NODEL+x} ]
-then
-	rm -rf mouli
-fi
-
