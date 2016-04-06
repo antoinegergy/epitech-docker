@@ -13,10 +13,11 @@ IPWD=$PWD
 cp norm.{dpr,note} mouli/
 
 # make (1/2 - mouli)
-[ -f mouli/Makefile ] && make -C mouli
+[ -f mouli/Makefile ] && make -C mouli > /dev/null 2>&1
 
 # make (2/2 - student)
-[ -f rendu/Makefile ] && make -C rendu $MAKE_RULE
+[ -f rendu/Makefile ] && make -C rendu $MAKE_RULE > /dev/null 2>&1
+
 cp -rn rendu/* mouli
 
 # run bugs
