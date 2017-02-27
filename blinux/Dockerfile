@@ -1,4 +1,4 @@
-FROM opensuse:13.2
+FROM opensuse:42.2
 MAINTAINER Thomas Dufour <thomas.dufour@epitech.eu>
 
 RUN zypper --gpg-auto-import-keys -n update
